@@ -27,15 +27,7 @@ public class Layers {
     }
 
 //-----------------------------------------------------------------
-/*
-    public LinkedList<Travels> getTravels() {
-        return travels;}
 
-    public void setTravels(LinkedList<Travels> travels) {
-        this.travels = travels;
-    }
-
-*/
     @SerializedName("wyjazdy")
     private JsonElement tmpTravels;
 
@@ -47,7 +39,6 @@ public class Layers {
         this.travels = travels;
     }
 
-   // private LinkedList<Travels> travels;
     private LinkedList<Map<String,String>> travels;
     //gdy pusta lista to jsonobject, a takto jsonarray
 
@@ -62,7 +53,6 @@ public class Layers {
     @SuppressWarnings("unchecked")
     public void loadTravels() {
         if (this.tmpTravels.isJsonObject())
-         //  this.travels = new LinkedList<Travels>();
             this.travels= new LinkedList<Map<String,String>>();
         else {
             this.travels = new Gson().fromJson(this.tmpTravels, LinkedList.class);

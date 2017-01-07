@@ -5,7 +5,6 @@ import com.google.gson.Gson;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 
@@ -42,7 +41,6 @@ public class JasonDownloader {
             url = new URL(links.getLinks("next"));
             pList = new File ("./Files/PoliticiansList" + counter + ".json");
 
-            //TODO ta częś jako metoda prywatna
             if(!pList.exists())
                 FileUtils.copyURLToFile(url, pList);
 
@@ -78,14 +76,4 @@ public class JasonDownloader {
 
         }
     }
-
-
-
-
-
-    //TODO korzystać z tej metody
-    private URL getLASTurlfromLinks(Links links) throws MalformedURLException {
-        return new URL(links.getLinks("last"));
-    }
-
-    }
+}

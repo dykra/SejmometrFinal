@@ -1,5 +1,6 @@
 package main;
 
+import agh.cs.sejm.ExpensesAnaliser;
 import agh.cs.sejm.JasonDownloader;
 
 import java.io.IOException;
@@ -22,10 +23,14 @@ public class SejmSystem {
             JasonDownloader jasonDownloader = new JasonDownloader();
             jasonDownloader.initializePoliticians();
 
-            //System.out.println(jasonDownloader.politiciansSet.getPolitisians().get(22).getLayers().getExpenses().getPunkty().toString());
-             System.out.println(jasonDownloader.politiciansSet.getPolitisians().get(23).getLayers().getTravels().get(0).get("kraj"));
-            // System.out.println(jasonDownloader.politiciansSet.getPolitisians().get(23).getLayers().getTravels().get(0).getCountry().toString());
+            ExpensesAnaliser a = new ExpensesAnaliser();
+
+            System.out.print(a.politicianExpenses("Maks", "Kraczkowski", 7, jasonDownloader.politiciansSet) + "\n");
+            System.out.print(a.averageOfPoliticiansExpenses(jasonDownloader.politiciansSet,7) + "\n" );
+            System.out.print(a.pettyExpenses("Piotr", "Szeliga", 7, jasonDownloader.politiciansSet));
+
             final long endTime = System.currentTimeMillis();
+
             System.out.println(endTime-startTime);
         }catch (IllegalArgumentException ex){
             System.out.print(ex.getMessage());

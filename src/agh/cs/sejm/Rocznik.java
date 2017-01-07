@@ -16,9 +16,7 @@ public class Rocznik {
     private String year;
 
 
-    public LinkedList<Double> getPola() {
-        return field;
-    }
+    public LinkedList<Double> getPola() { return field;  }
 
     public void setPola(LinkedList<Double> field) {
         this.field = field;

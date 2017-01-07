@@ -2,6 +2,7 @@ package agh.cs.sejm;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.LinkedList;
 
 
 /**
@@ -16,6 +17,18 @@ public class Politicians {
 
     @SerializedName("layers")
     private Layers layers;
+
+
+    private LinkedList<String> getTermsList(){
+        return this.getData().getTerms();
+    }
+
+    public boolean isTerm7(){
+        for(String tmp :this.getTermsList()){
+            if (tmp.equals("7")) return true;
+        }
+        return false;}
+
 
 
     public String getId() {
