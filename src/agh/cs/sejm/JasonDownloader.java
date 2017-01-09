@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 
@@ -14,18 +15,16 @@ import java.net.URL;
 public class JasonDownloader {
     public PoliticiansSet politiciansSet;
 
-    public void initializePoliticians() throws IOException {
+    public void initializePoliticians(Boolean a) throws IOException {
 
-        //TODO metoda do aktualizacji plików
-
-        File file = new File ("./Files");
-        if(!file.exists())
+        File file = new File ("./src/Files");
+        if(!file.exists() || a.equals(Boolean.TRUE))
             file.mkdir(); //Creates the directory named by this abstract pathname.
 
         URL url = new URL("https://api-v3.mojepanstwo.pl/dane/poslowie.json");
         int counter = 0;
-        File pList = new File ("./Files/PoliticiansList" + counter + ".json");
-        if(!pList.exists())
+        File pList = new File ("./src/Files/PoliticiansList" + counter + ".json");
+        if(!pList.exists() || a.equals(Boolean.TRUE))
             FileUtils.copyURLToFile(url, pList);
 
         Gson gson = new Gson();
@@ -39,9 +38,9 @@ public class JasonDownloader {
             counter ++;
             //pobieramy nowe url z lasta i dla niego pobieramy pliki
             url = new URL(links.getLinks("next"));
-            pList = new File ("./Files/PoliticiansList" + counter + ".json");
+            pList = new File ("./src/Files/PoliticiansList" + counter + ".json");
 
-            if(!pList.exists())
+            if(!pList.exists() || a.equals(Boolean.TRUE))
                 FileUtils.copyURLToFile(url, pList);
 
             politiciansSetTmp= gson.fromJson(new FileReader(pList),PoliticiansSet.class);
@@ -49,23 +48,23 @@ public class JasonDownloader {
 
             this.politiciansSet.addNewPolitisians(politiciansSetTmp.getPolitisians());
         }
-        this.downloadPolitisiansDetails();
+        this.downloadPolitisiansDetails(a);
     }
 
 
 
-    private void downloadPolitisiansDetails() throws IOException {
+    private void downloadPolitisiansDetails(Boolean a) throws IOException {
 
-        File file = new File ("./Files/Layers");
-        if(!file.exists())
+        File file = new File ("./src/Files/Layers");
+        if(!file.exists() || a.equals(Boolean.TRUE))
             file.mkdir();                            //Creates the directory named by this abstract pathname.
 
         Politicians politicianTmp;
         for(Politicians currentPolitician : this.politiciansSet.getPolitisians()) {
             URL url = new URL("https://api-v3.mojepanstwo.pl/dane/poslowie/" + currentPolitician.getId() + ".json?layers[]=wydatki&layers[]=wyjazdy");
-            File politicianDetails = new File("./Files/Layers/" + currentPolitician.getId() + ".json");
-            if(!politicianDetails.exists()){
-                FileUtils.copyURLToFile(url, politicianDetails); //pobieramy z url do stworzonego pliku
+            File politicianDetails = new File("./src/Files/Layers/" + currentPolitician.getId() + ".json");
+            if(!politicianDetails.exists() || a.equals(Boolean.TRUE)){
+                FileUtils.copyURLToFile(url, politicianDetails); //Copies bytes from the URL source to a file destination.
             }
 
             Gson gson = new Gson();
@@ -75,5 +74,10 @@ public class JasonDownloader {
             currentPolitician.getLayers().loadTravels();
 
         }
+    }
+
+    public void actualizePolitisians() throws IOException {
+        boolean a = true;
+        initializePoliticians(a);
     }
 }

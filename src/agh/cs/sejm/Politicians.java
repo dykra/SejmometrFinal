@@ -29,6 +29,11 @@ public class Politicians {
         }
         return false;}
 
+    public boolean isTerm8(){
+        for(String tmp :this.getTermsList()){
+            if (tmp.equals("8")) return true;
+        }
+        return false;}
 
 
     public String getId() {

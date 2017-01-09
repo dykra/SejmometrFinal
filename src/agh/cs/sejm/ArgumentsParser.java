@@ -4,7 +4,7 @@ package agh.cs.sejm;
  * Created by Joanna on 2016-12-15.
  */
 public class ArgumentsParser {
-
+//todo 7 jako aktualizacja plików
     public int parseArguments(String[] args) {
         int result=-1;
         if (args.length <= 4 && args.length >=2 ) {
