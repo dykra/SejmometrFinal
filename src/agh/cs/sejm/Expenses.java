@@ -22,15 +22,18 @@ public class Expenses {
         this.punkty = punkty;
     }
 
-    public LinkedList<Rocznik> getRoczniki() {
+    public LinkedList<Yearbook> getRoczniki() {
         return roczniki;
     }
 
-    public void setRoczniki(LinkedList<Rocznik> roczniki) {
+    public void setRoczniki(LinkedList<Yearbook> roczniki) {
         this.roczniki = roczniki;
     }
 
     @SerializedName("roczniki")
-    private LinkedList<Rocznik> roczniki;
+    private LinkedList<Yearbook> roczniki;
+
+
+
 
 }

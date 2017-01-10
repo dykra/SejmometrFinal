@@ -28,16 +28,16 @@ public class SejmSystem {
 
             ExpensesAnaliser a = new ExpensesAnaliser();
 
-            System.out.print(a.politicianExpenses("Ewa", "Kopacz", 7, jasonDownloader.politiciansSet) + "\n");
+            //System.out.print(a.politicianExpenses("Ewa", "Kopacz", 7, jasonDownloader.politiciansSet) + "\n");
             //System.out.print(a.averageOfPoliticiansExpenses(jasonDownloader.politiciansSet,7).toString() + "\n" );
             //System.out.print(a.pettyExpenses("Piotr", "Szeliga", 7, jasonDownloader.politiciansSet).toString()  + "\n");
 
             final long endTime = System.currentTimeMillis();
             TravelAnalyser b = new TravelAnalyser();
             LinkedList<Politicians> list = b.italyTravelers(8,jasonDownloader.politiciansSet);
-            //System.out.println(b.mostExpensiveTravel(8,jasonDownloader.politiciansSet));
-            //System.out.println(b.theLongestTraveler(7,jasonDownloader.politiciansSet));
-
+            //System.out.println(b.mostExpensiveTravel(7,jasonDownloader.politiciansSet));
+            System.out.println(b.theLongestAbroadTraveler(7,jasonDownloader.politiciansSet));
+            System.out.println(b.theBiggestAbroadTraveller(8,jasonDownloader.politiciansSet));
             System.out.println(endTime-startTime);
         }catch (IllegalArgumentException ex){
             System.out.print(ex.getMessage());

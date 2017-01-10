@@ -17,13 +17,13 @@ public class JasonDownloader {
 
     public void initializePoliticians(Boolean a) throws IOException {
 
-        File file = new File ("./src/Files");
+        File file = new File ("./Files");
         if(!file.exists() || a.equals(Boolean.TRUE))
             file.mkdir(); //Creates the directory named by this abstract pathname.
 
         URL url = new URL("https://api-v3.mojepanstwo.pl/dane/poslowie.json");
         int counter = 0;
-        File pList = new File ("./src/Files/PoliticiansList" + counter + ".json");
+        File pList = new File ("./Files/PoliticiansList" + counter + ".json");
         if(!pList.exists() || a.equals(Boolean.TRUE))
             FileUtils.copyURLToFile(url, pList);
 
@@ -38,7 +38,7 @@ public class JasonDownloader {
             counter ++;
             //pobieramy nowe url z lasta i dla niego pobieramy pliki
             url = new URL(links.getLinks("next"));
-            pList = new File ("./src/Files/PoliticiansList" + counter + ".json");
+            pList = new File ("./Files/PoliticiansList" + counter + ".json");
 
             if(!pList.exists() || a.equals(Boolean.TRUE))
                 FileUtils.copyURLToFile(url, pList);
@@ -55,14 +55,14 @@ public class JasonDownloader {
 
     private void downloadPolitisiansDetails(Boolean a) throws IOException {
 
-        File file = new File ("./src/Files/Layers");
+        File file = new File ("./Files/Layers");
         if(!file.exists() || a.equals(Boolean.TRUE))
             file.mkdir();                            //Creates the directory named by this abstract pathname.
 
         Politicians politicianTmp;
         for(Politicians currentPolitician : this.politiciansSet.getPolitisians()) {
             URL url = new URL("https://api-v3.mojepanstwo.pl/dane/poslowie/" + currentPolitician.getId() + ".json?layers[]=wydatki&layers[]=wyjazdy");
-            File politicianDetails = new File("./src/Files/Layers/" + currentPolitician.getId() + ".json");
+            File politicianDetails = new File("./Files/Layers/" + currentPolitician.getId() + ".json");
             if(!politicianDetails.exists() || a.equals(Boolean.TRUE)){
                 FileUtils.copyURLToFile(url, politicianDetails); //Copies bytes from the URL source to a file destination.
             }
