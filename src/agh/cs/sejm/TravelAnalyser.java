@@ -61,7 +61,7 @@ public class TravelAnalyser extends Analiser{
 
     return result;}
 
-    //--------------------------------------------
+
     public String mostExpensiveTravel (int term, PoliticiansSet politiciansSet){
 
         boolean isTerm7 = is7thTermandSetTerms(term);

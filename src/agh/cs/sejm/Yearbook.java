@@ -1,8 +1,10 @@
 package agh.cs.sejm;
+import static java.lang.StrictMath.round;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.LinkedList;
+
 
 /**
  * Created by Joanna on 2017-01-06.
@@ -16,9 +18,9 @@ public class Yearbook {
     private String year;
 
 
-    public LinkedList<Double> getPola() { return field;  }
+    public LinkedList<Double> getFields() { return field;  }
 
-    public void setPola(LinkedList<Double> field) {
+    public void setFields(LinkedList<Double> field) {
         this.field = field;
     }
 
@@ -32,15 +34,11 @@ public class Yearbook {
 
 
     public Double sumExpensesFromThisYear() {
-        Double result = new Double(0);
-        for (Double expense : this.getPola()) {
+        Double result = new Double(0.00);
+        for (Double expense : this.getFields()) {
             result += expense;
         }
         return result;
     }
-
-
-
-
 
 }

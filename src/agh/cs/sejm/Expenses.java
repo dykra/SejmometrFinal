@@ -34,6 +34,4 @@ public class Expenses {
     private LinkedList<Yearbook> roczniki;
 
 
-
-
 }

@@ -6,6 +6,7 @@ import java.io.IOException;
  * Created by Joanna on 2016-12-15.
  */
 public class ArgumentsParser {
+
     private JasonDownloader jasonDownloader;
     private ExpensesAnaliser expensesAnaliser;
     private TravelAnalyser travelAnalyser;
@@ -13,15 +14,21 @@ public class ArgumentsParser {
 
 
     public void parseArguments(String[] args) throws IOException {
-        if (Integer.parseInt(args[0]) != 7 && Integer.parseInt(args[0]) !=8) throw new IllegalArgumentException(args[0] + "Podałeś nieprawidłowy numer kadencji.");
+        if (args.length == 1 && args[0].equals("actualize")){
+                jasonDownloader = new JasonDownloader();
+                jasonDownloader.actualizePolitisians();
+                System.out.println("Zaktualizowano pliki na dysku.");
+        }
+        if (args.length == 4 || args.length ==2 || args.length == 3) {
+
+            if (Integer.parseInt(args[0]) != 7 && Integer.parseInt(args[0]) !=8) throw new IllegalArgumentException(args[0] + "Podałeś nieprawidłowy numer kadencji.");
             else {
                 jasonDownloader = new JasonDownloader();
                 jasonDownloader.initializePoliticians(Boolean.FALSE);
                 expensesAnaliser = new ExpensesAnaliser();
                 travelAnalyser = new TravelAnalyser();
-        }
+            }
 
-        if (args.length <= 4 && args.length >=2 || args.length == 3) {
             if (args.length == 4){
                 // gdy mamy imię i nazwisko
                 switch (args[3]){
@@ -39,7 +46,8 @@ public class ArgumentsParser {
                 //nie mamy konkretnego posła tylko ogolne
                 switch (args[1]) {
                     case "avg":
-                        System.out.println(this.expensesAnaliser.averageOfPoliticiansExpenses(jasonDownloader.politiciansSet,Integer.parseInt(args[0])).toString());
+                        //System.out.println(this.expensesAnaliser.averageOfPoliticiansExpenses(jasonDownloader.politiciansSet,Integer.parseInt(args[0])).toString());
+                        System.out.println(this.expensesAnaliser.averageOfPoliticiansExpenses(jasonDownloader.politiciansSet,Integer.parseInt(args[0])));
                         break;
                     case "traveller":
                         System.out.println(this.travelAnalyser.theBiggestAbroadTraveller(Integer.parseInt(args[0]), jasonDownloader.politiciansSet ));
@@ -52,10 +60,6 @@ public class ArgumentsParser {
                         break;
                     case "italy":
                         System.out.println(this.travelAnalyser.italyTravelers(Integer.parseInt(args[0]), jasonDownloader.politiciansSet ));
-                        break;
-                    case "actualize":
-                        jasonDownloader.actualizePolitisians();
-                        System.out.println("Zaktualizowano pliki na dysku.");
                         break;
                     default:
                         throw new IllegalArgumentException(args[1] + "Podałeś nieprawidłowe argumenty.");

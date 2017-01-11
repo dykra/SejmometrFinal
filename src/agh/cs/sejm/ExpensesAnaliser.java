@@ -1,13 +1,16 @@
 package agh.cs.sejm;
 
+import static java.lang.StrictMath.round;
+
 /**
  * Created by Joanna on 2017-01-07.
  */
 public class ExpensesAnaliser extends Analiser{
     //klasa wyliczająca dane dotyczące wydatków
 
-    public Double averageOfPoliticiansExpenses(PoliticiansSet politiciansSet, int term) {
-        Double average = new Double(0);
+    public double averageOfPoliticiansExpenses(PoliticiansSet politiciansSet, int term) {
+        //Double average = new Double(0);
+double average = 0;
         boolean isTerm7 = is7thTermandSetTerms(term);
         int i = 0;
         for (Politicians politician : politiciansSet.getPolitisians()) {
@@ -17,15 +20,20 @@ public class ExpensesAnaliser extends Analiser{
                 for (Yearbook yearbook : politician.getPoliticiansYearbooks()) {
 
                     if (isYearIn7thTerm(yearbook.getRok()) && isTerm7) {
-                        average += yearbook.sumExpensesFromThisYear();
+                        average += yearbook.sumExpensesFromThisYear().doubleValue();
                     }
                     if (!isYearIn7thTerm(yearbook.getRok()) && !isTerm7) {
-                        average += yearbook.sumExpensesFromThisYear();
+                        average += yearbook.sumExpensesFromThisYear().doubleValue();
                     }
                 }
             }
         }
-        if (i > 0) average /= i;
+
+        if (i != 0) average /= i;
+
+        average *=100;
+        average = round(average);
+        average/=100;
         return average;
     }
 
@@ -90,7 +98,7 @@ public class ExpensesAnaliser extends Analiser{
     }
 
     private Double sumPettyExpenses(Yearbook yearbook, double expenses) {
-        return expenses += yearbook.getPola().get(12);
+        return expenses += yearbook.getFields().get(12);
     }
 
     private Politicians giveWantedPolitician(String firstname, String lastname, int term, PoliticiansSet politiciansSet, boolean isTerm7){
@@ -102,7 +110,5 @@ public class ExpensesAnaliser extends Analiser{
         }
         return wantedPolitician;
     }
-
-
 
 }

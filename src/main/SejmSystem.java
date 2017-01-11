@@ -17,6 +17,7 @@ public class SejmSystem {
             parser.parseArguments(args);
 
             final long endTime = System.currentTimeMillis();
+
             System.out.println("Czas wykonania w sekundach:" + ((endTime-startTime)/1000));
 
         }catch (IllegalArgumentException ex){

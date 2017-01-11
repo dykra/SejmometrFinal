@@ -36,6 +36,7 @@ public class Politicians {
         return false;}
 
     public LinkedList<Yearbook> getPoliticiansYearbooks(){
+
         return this.getLayers().getExpenses().getRoczniki();
     }
 
