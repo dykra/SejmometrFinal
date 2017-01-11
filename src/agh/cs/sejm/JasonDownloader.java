@@ -77,7 +77,7 @@ public class JasonDownloader {
     }
 
     public void actualizePolitisians() throws IOException {
-        boolean a = true;
-        initializePoliticians(a);
+
+        initializePoliticians(Boolean.TRUE);
     }
 }
