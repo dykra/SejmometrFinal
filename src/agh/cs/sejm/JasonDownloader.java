@@ -46,9 +46,9 @@ public class JasonDownloader {
             politiciansSetTmp= gson.fromJson(new FileReader(pList),PoliticiansSet.class);
             links =  gson.fromJson(new FileReader(pList), Links.class);
 
-            this.politiciansSet.addNewPolitisians(politiciansSetTmp.getPolitisians());
+            politiciansSet.addNewPolitisians(politiciansSetTmp.getPolitisians());
         }
-        this.downloadPolitisiansDetails(a);
+        downloadPolitisiansDetails(a);
     }
 
 
@@ -63,12 +63,11 @@ public class JasonDownloader {
         for(Politicians currentPolitician : this.politiciansSet.getPolitisians()) {
             URL url = new URL("https://api-v3.mojepanstwo.pl/dane/poslowie/" + currentPolitician.getId() + ".json?layers[]=wydatki&layers[]=wyjazdy");
             File politicianDetails = new File("./Files/Layers/" + currentPolitician.getId() + ".json");
+
             if(!politicianDetails.exists() || a.equals(Boolean.TRUE)){
                 FileUtils.copyURLToFile(url, politicianDetails); //Copies bytes from the URL source to a file destination.
             }
-
             Gson gson = new Gson();
-
             politicianTmp = gson.fromJson(new FileReader(politicianDetails),Politicians.class); //myType nazwa = gson.from(String, MyType class)
             currentPolitician.setLayers(politicianTmp.getLayers());
             currentPolitician.getLayers().loadTravels();
