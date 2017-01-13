@@ -3,6 +3,7 @@ package main;
 import agh.cs.sejm.*;
 
 import java.io.IOException;
+import java.util.LinkedList;
 
 /**
  * Created by Joanna on 2016-12-16.
@@ -19,6 +20,7 @@ public class SejmSystem {
             final long endTime = System.currentTimeMillis();
 
             System.out.println("Czas wykonania w sekundach:" + ((endTime-startTime)/1000));
+
 
         }catch (IllegalArgumentException ex){
             System.out.print(ex.getMessage());

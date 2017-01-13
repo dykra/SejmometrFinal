@@ -1,6 +1,7 @@
 package agh.cs.sejm;
 
 import java.io.IOException;
+import java.util.LinkedList;
 
 /**
  * Created by Joanna on 2016-12-15.
@@ -46,8 +47,7 @@ public class ArgumentsParser {
                 //nie mamy konkretnego posła tylko ogolne
                 switch (args[1]) {
                     case "avg":
-                        //System.out.println(this.expensesAnaliser.averageOfPoliticiansExpenses(jasonDownloader.politiciansSet,Integer.parseInt(args[0])).toString());
-                        System.out.println(this.expensesAnaliser.averageOfPoliticiansExpenses(jasonDownloader.politiciansSet,Integer.parseInt(args[0])));
+                       System.out.println(this.expensesAnaliser.averageOfPoliticiansExpenses(jasonDownloader.politiciansSet,Integer.parseInt(args[0])));
                         break;
                     case "traveller":
                         System.out.println(this.travelAnalyser.theBiggestAbroadTraveller(Integer.parseInt(args[0]), jasonDownloader.politiciansSet ));
@@ -59,7 +59,12 @@ public class ArgumentsParser {
                         System.out.println(this.travelAnalyser.mostExpensiveTravel(Integer.parseInt(args[0]), jasonDownloader.politiciansSet ));
                         break;
                     case "italy":
-                        System.out.println(this.travelAnalyser.italyTravelers(Integer.parseInt(args[0]), jasonDownloader.politiciansSet ));
+                        
+                        LinkedList<Politicians> result = travelAnalyser.italyTravelers(8,jasonDownloader.politiciansSet);
+                        for (int i=0; i < result.size(); i++) {
+                            System.out.println(result.get(i).getData().getFirstName() + result.get(i).getData().getLastName());
+                            //System.out.println(result.get(i).getData().getLastName());
+                        }
                         break;
                     default:
                         throw new IllegalArgumentException(args[1] + "Podałeś nieprawidłowe argumenty.");
